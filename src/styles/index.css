@@ -1,0 +1,74 @@
+* {
+  border: 0;
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: unset;
+}
+
+@font-face {
+  font-family: "Barlow";
+  font-weight: 300;
+  font-style: normal;
+  src: url("/src/public/fonts/Barlow-Light.woff2") format("truetype");
+}
+
+@font-face {
+  font-family: "Barlow";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/src/public/fonts/Barlow-Regular.woff2") format("truetype");
+}
+
+@font-face {
+  font-family: "Barlow";
+  font-weight: 500;
+  font-style: normal;
+  src: url("/src/public/fonts/Barlow-Medium.woff2") format("truetype");
+}
+
+@font-face {
+  font-family: "Barlow";
+  font-weight: 600;
+  font-style: normal;
+  src: url("/src/public/fonts/Barlow-SemiBold.woff2") format("truetype");
+}
+
+@font-face {
+  font-family: "Barlow";
+  font-weight: 800;
+  font-style: normal;
+  src: url("/src/public/fonts/Barlow-ExtraBold.woff2") format("truetype");
+}
+
+:root {
+  --background-primary: rgb(237, 232, 220);
+  --background-black: #000000;
+  --background-gray: rgb(224 224 224);
+  --background-light-gray: rgb(246, 246, 246);
+  --background-darker-gray: rgb(62, 61, 64);
+  --background-white: #ffffff;
+  --background-pink: #e7cccc;
+  --background-orange: #ffebe0;
+  --background-red: rgb(226, 0, 26);
+  --text-white: rgb(255 255 255);
+  --text-pink: #e7cccc;
+  --text-secondary-red: rgb(226, 0, 26);
+  --text-gray: rgb(107 114 128);
+  --text-black: #140f2d;
+
+  --mobile-max-width: 899px;
+}
+
+html {
+  font-size: 62.5%;
+  /* 1rem = 10px */
+  font-family: "Barlow", sans-serif;
+  font-optical-sizing: auto;
+}
+
+h2 {
+  color: var(--background-darker-gray) !important;
+  font-weight: 500;
+}

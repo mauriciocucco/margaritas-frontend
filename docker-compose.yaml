@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["serve", "-s", "dist"]
+    networks:
+      - external_network
+
+networks:
+  external_network:
+    external: true

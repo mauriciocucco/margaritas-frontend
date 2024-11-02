@@ -1,0 +1,50 @@
+p {
+  font-size: 15px;
+  font-family: "Barlow", sans-serif;
+  color: var(--text-white);
+}
+
+.nav-list {
+  background-color: var(--background-light-gray);
+  width: 100%;
+  gap: 3rem;
+  padding: 1rem 0rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.ul-list {
+  font-family: "Barlow", sans-serif;
+  font-weight: 550;
+  display: flex;
+  gap: 2rem;
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: var(--text-black);
+  font-size: 1.6rem;
+  position: relative;
+  text-decoration: none;
+}
+
+.active {
+  color: var(--text-secondary-red) !important;
+}
+
+.nav-link:hover {
+  color: var(--text-gray);
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.logo {
+  width: 5rem;
+  border-radius: 50%;
+}
