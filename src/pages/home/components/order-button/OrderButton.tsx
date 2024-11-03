@@ -1,24 +1,28 @@
-import { useMutation } from "@tanstack/react-query";
-import { createMassOrders } from "../../../api/orders/orders";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createMassOrders } from "../../../../api/orders";
 import { useState } from "react";
 import "./OrderButton.css";
 
 const OrderButton = () => {
-  const [orderCount, setOrderCount] = useState(0);
+  const [orderCount, setOrderCount] = useState(1);
+  const queryClient = useQueryClient();
 
-  const massOrderMutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: createMassOrders,
-    onSuccess: (data, variables) => {
-      alert(`Successfully created ${variables} orders.`);
+    onSuccess: (response) => {
+      console.log(response);
+
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error) => {
       console.error("Error creating mass orders:", error);
+
       alert("Error creating mass orders.");
     },
   });
 
   const handleMassOrder = () => {
-    massOrderMutation.mutate(orderCount);
+    mutate(orderCount);
   };
 
   return (
@@ -26,7 +30,7 @@ const OrderButton = () => {
       <input
         className="order-input"
         type="number"
-        min={0}
+        min={1}
         value={orderCount}
         onChange={(e) => setOrderCount(Number(e.target.value))}
         placeholder="Number of orders"
@@ -34,9 +38,9 @@ const OrderButton = () => {
       <button
         className="order-button"
         onClick={handleMassOrder}
-        disabled={!orderCount}
+        disabled={isPending}
       >
-        Order
+        Ordenar plato/s
       </button>
     </div>
   );

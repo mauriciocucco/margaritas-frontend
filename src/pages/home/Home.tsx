@@ -1,7 +1,7 @@
-import OrderButton from "./components/OrderButton";
+import OrdersList from "./components/orders-list/OrdersList";
 
 const Home = () => {
-  return <OrderButton></OrderButton>;
+  return <OrdersList></OrdersList>;
 };
 
 export default Home;

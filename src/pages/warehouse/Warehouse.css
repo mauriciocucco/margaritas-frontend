@@ -1,0 +1,70 @@
+.main-warehouse-container {
+  font-family: "Barlow", sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+.tables-container {
+  display: flex;
+  gap: 5rem;
+}
+
+.main-warehouse-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.warehouse-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.warehouse-table-header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.reload-button {
+  font-family: "Barlow", sans-serif;
+  font-size: 1rem;
+  font-weight: 550;
+  color: #fff;
+  background-color: #007bff;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.reload-button:hover {
+  background-color: #0056b3;
+}
+
+.warehouse-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.warehouse-table th,
+.warehouse-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.warehouse-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.warehouse-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.warehouse-table tr:hover {
+  background-color: #f1f1f1;
+}

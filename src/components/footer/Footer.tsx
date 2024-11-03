@@ -5,7 +5,7 @@ const Footer = () => {
     <>
       <footer className="footer">
         <div className="container-signature">
-          <p>Alegra Challenge created by Mauricio Cucco</p>
+          <p>Alegra Challenge hecho por Mauricio Cucco</p>
         </div>
       </footer>
     </>

@@ -7,41 +7,6 @@
   text-decoration: unset;
 }
 
-@font-face {
-  font-family: "Barlow";
-  font-weight: 300;
-  font-style: normal;
-  src: url("/src/public/fonts/Barlow-Light.woff2") format("truetype");
-}
-
-@font-face {
-  font-family: "Barlow";
-  font-weight: 400;
-  font-style: normal;
-  src: url("/src/public/fonts/Barlow-Regular.woff2") format("truetype");
-}
-
-@font-face {
-  font-family: "Barlow";
-  font-weight: 500;
-  font-style: normal;
-  src: url("/src/public/fonts/Barlow-Medium.woff2") format("truetype");
-}
-
-@font-face {
-  font-family: "Barlow";
-  font-weight: 600;
-  font-style: normal;
-  src: url("/src/public/fonts/Barlow-SemiBold.woff2") format("truetype");
-}
-
-@font-face {
-  font-family: "Barlow";
-  font-weight: 800;
-  font-style: normal;
-  src: url("/src/public/fonts/Barlow-ExtraBold.woff2") format("truetype");
-}
-
 :root {
   --background-primary: rgb(237, 232, 220);
   --background-black: #000000;
@@ -57,8 +22,6 @@
   --text-secondary-red: rgb(226, 0, 26);
   --text-gray: rgb(107 114 128);
   --text-black: #140f2d;
-
-  --mobile-max-width: 899px;
 }
 
 html {

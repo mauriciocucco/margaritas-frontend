@@ -4,12 +4,9 @@ import logo from "/images/logo.jpg";
 
 const Navbar = () => {
   const items = [
-    // { to: "/", label: "INICIO" },
-    // { to: "/nosotros", label: "NOSOTROS" },
-    // { to: "/nuestros-vasquitos", label: "NUESTROS VASQUITOS" },
-    // { to: "/socios", label: "SOCIOS" },
-    // { to: "/patrocinadores", label: "PATROCINADORES" },
-    // { to: "/contacto", label: "CONTACTO" },
+    { to: "/", label: "Ordenar" },
+    { to: "/warehouse", label: "Bodega" },
+    { to: "/recipes", label: "Recetas" },
   ];
 
   return (
