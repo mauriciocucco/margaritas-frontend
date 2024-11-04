@@ -25,7 +25,6 @@ const Recipes = () => {
         <table className="warehouse-table">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Nombre</th>
               <th>Ingredientes</th>
             </tr>
@@ -39,7 +38,6 @@ const Recipes = () => {
                   ingredients: Record<string, string | number>;
                 }) => (
                   <tr key={recipe.id}>
-                    <td>{recipe.id}</td>
                     <td>{RECIPES[recipe.name as keyof typeof RECIPES]}</td>
                     <td>
                       <ul>

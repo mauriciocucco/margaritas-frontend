@@ -30,16 +30,16 @@ export const getOrders = async (
 };
 
 export const createMassOrders = async (count: number) => {
-  const orders = [];
+  const orders: Array<{ customerId: string }> = [];
   const chunks = [];
   const responses = [];
 
   try {
-    for (const i of Array(count).keys()) {
+    Array.from({ length: count }).forEach(() => {
       orders.push({
         customerId: uuidv4(),
       });
-    }
+    });
 
     for (let i = 0; i < orders.length; i += 50) {
       chunks.push(orders.slice(i, i + 50));
