@@ -29,7 +29,6 @@ const Inventory = () => {
       <table className="warehouse-table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Ingrediente</th>
             <th>Cantidad</th>
           </tr>
@@ -39,7 +38,6 @@ const Inventory = () => {
             ingredients.map(
               (ingredient: { id: number; name: string; quantity: number }) => (
                 <tr key={ingredient.id}>
-                  <td>{ingredient.id}</td>
                   <td>
                     {INGREDIENTS[ingredient.name as keyof typeof INGREDIENTS]}
                   </td>

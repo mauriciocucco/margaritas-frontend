@@ -14,7 +14,20 @@ export const getInventory = async () => {
   return data;
 };
 
-export const getPurchaseHistory = async () => {
+export const getPurchaseHistory = async (
+  page: number = 1,
+  limit: number = 10,
+  ingredient: string | null = null
+) => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+
+  if (ingredient) {
+    params.append("ingredient", ingredient.toString());
+  }
+
   const response = await fetch(
     `${import.meta.env.VITE_API_URL}/warehouse/purchase-history`
   );

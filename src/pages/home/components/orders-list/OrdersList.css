@@ -1,6 +1,7 @@
 .orders-container {
   font-family: "Barlow", sans-serif;
   padding: 20px;
+  text-align: center;
 }
 
 .orders-container h1 {
@@ -26,9 +27,10 @@
 }
 
 .orders-table {
-  width: 100%;
   border-collapse: collapse;
+  font-size: 1.5rem;
   margin-top: 10px;
+  width: 100%;
 }
 
 .orders-table th,
@@ -67,4 +69,17 @@
 
 .reload-button:hover {
   background-color: #0056b3;
+}
+
+.pagination {
+  margin-top: 10px;
+}
+
+.pagination button {
+  margin-right: 5px;
+  padding: 5px 10px;
+}
+
+.pagination span {
+  margin-left: 10px;
 }
