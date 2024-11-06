@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getInventory } from "../../../../api/warehouse";
 import { INGREDIENTS } from "./constants/ingredients";
+import RefreshIcon from "../../../../assets/icons/refresh/RefreshIcon";
 
 const Inventory = () => {
   const {
@@ -24,6 +25,7 @@ const Inventory = () => {
         <h2>Inventario</h2>
         <button className="reload-button" onClick={() => refetch()}>
           Recargar
+          <RefreshIcon />
         </button>
       </div>
       <table className="warehouse-table">

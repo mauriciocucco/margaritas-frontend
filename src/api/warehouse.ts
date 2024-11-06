@@ -29,7 +29,9 @@ export const getPurchaseHistory = async (
   }
 
   const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/warehouse/purchase-history`
+    `${
+      import.meta.env.VITE_API_URL
+    }/warehouse/purchase-history?${params.toString()}`
   );
 
   if (!response.ok) {

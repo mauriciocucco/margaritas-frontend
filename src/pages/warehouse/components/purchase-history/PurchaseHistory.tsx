@@ -9,8 +9,12 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { INGREDIENTS } from "../inventory/constants/ingredients";
+import "./PurchaseHistory.css";
+import RefreshIcon from "../../../../assets/icons/refresh/RefreshIcon";
 
 const PurchaseHistory = () => {
+  const [ingredient, setIngredient] = useState<string | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 10;
   const {
@@ -18,8 +22,8 @@ const PurchaseHistory = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["purchaseHistory", pageIndex],
-    queryFn: () => getPurchaseHistory(pageIndex + 1, pageSize, null),
+    queryKey: ["purchaseHistory", pageIndex, ingredient],
+    queryFn: () => getPurchaseHistory(pageIndex + 1, pageSize, ingredient),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
@@ -32,7 +36,8 @@ const PurchaseHistory = () => {
   >(
     () => [
       {
-        accessorFn: (history: { ingredient: string }) => history.ingredient,
+        accessorFn: (history: { ingredient: keyof typeof INGREDIENTS }) =>
+          INGREDIENTS[history.ingredient],
         id: "ingredient",
         header: "Ingrediente",
       },
@@ -76,13 +81,35 @@ const PurchaseHistory = () => {
   }
 
   return (
-    <div className="table-wrapper">
+    <div className="table-wrapper purchase-table-wrapper">
       <div className="warehouse-table-header">
         <h2>Historial de compras</h2>
         <button className="reload-button" onClick={() => refetch()}>
           Recargar
+          <RefreshIcon />
         </button>
       </div>
+
+      <div className="filter-container">
+        <label htmlFor="ingredient-filter">Filtrar por ingrediente:</label>
+        <select
+          id="ingredient-filter"
+          value={ingredient || "Todos"}
+          onChange={(e) => {
+            const value = e.target.value;
+            setIngredient(value === "Todos" ? null : value);
+            setPageIndex(0); // Reinicia la página al cambiar el filtro
+          }}
+        >
+          <option value="Todos">Todos</option>
+          {Object.keys(INGREDIENTS).map((key) => (
+            <option key={key} value={key}>
+              {INGREDIENTS[key as keyof typeof INGREDIENTS]}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {purchaseHistory.data?.length > 0 ? (
         <>
           <table className="warehouse-table">

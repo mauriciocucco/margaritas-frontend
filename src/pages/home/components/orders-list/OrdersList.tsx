@@ -13,8 +13,10 @@ import {
   getPaginationRowModel,
   flexRender,
 } from "@tanstack/react-table";
+import RefreshIcon from "../../../../assets/icons/refresh/RefreshIcon";
 
 const OrdersList = () => {
+  const [statusId, setStatusId] = useState<number | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 10;
   const {
@@ -22,8 +24,8 @@ const OrdersList = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["orders", pageIndex],
-    queryFn: () => getOrders(pageIndex + 1, pageSize, null),
+    queryKey: ["orders", pageIndex, statusId],
+    queryFn: () => getOrders(pageIndex + 1, pageSize, statusId),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
@@ -51,10 +53,15 @@ const OrdersList = () => {
         header: "Plato",
       },
       {
-        accessorFn: (row: { statusId: keyof typeof ORDER_STATUSES }) =>
-          ORDER_STATUSES[row.statusId as keyof typeof ORDER_STATUSES],
-        id: "statusId",
+        accessorKey: "statusId",
         header: "Estado",
+        cell: ({ row }) => {
+          const statusId = row.original.statusId;
+          const statusName = ORDER_STATUSES[statusId];
+          const statusClass = `status-${statusId}`;
+
+          return <span className={statusClass}>{statusName}</span>;
+        },
       },
       {
         accessorFn: (row: { createdAt: string }) => formatDate(row.createdAt),
@@ -96,12 +103,34 @@ const OrdersList = () => {
 
       <OrderButton></OrderButton>
 
+      <div className="filter-container">
+        <label htmlFor="status-filter">Filtrar por estado:</label>
+        <select
+          id="status-filter"
+          value={statusId || "Todos"}
+          onChange={(e) => {
+            const value = e.target.value;
+            setStatusId(value === "Todos" ? null : Number(value));
+            setPageIndex(0);
+          }}
+        >
+          <option value="Todos">Todos</option>
+          {Object.entries(ORDER_STATUSES).map(([key, value]) => (
+            <option key={key} value={key}>
+              {value}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="orders-table-header">
         <h2>Órdenes</h2>
         <button className="reload-button" onClick={() => refetch()}>
           Recargar
+          <RefreshIcon />
         </button>
       </div>
+
       {ordersPagination.data?.length > 0 ? (
         <>
           <table className="orders-table">

@@ -1,0 +1,6 @@
+.refresh-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}

@@ -26,7 +26,7 @@ const OrderButton = () => {
   };
 
   return (
-    <div>
+    <div className="button-container">
       <input
         className="order-input"
         type="number"
