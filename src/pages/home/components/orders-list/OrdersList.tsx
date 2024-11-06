@@ -21,7 +21,7 @@ const OrdersList = () => {
   const pageSize = 10;
   const {
     data: ordersPagination,
-    isLoading,
+    isPending,
     refetch,
   } = useQuery({
     queryKey: ["orders", pageIndex, statusId],
@@ -93,7 +93,7 @@ const OrdersList = () => {
     },
   });
 
-  if (isLoading) {
+  if (isPending) {
     return <div>Cargando...</div>;
   }
 

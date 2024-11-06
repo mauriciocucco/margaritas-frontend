@@ -6,7 +6,7 @@ import RefreshIcon from "../../../../assets/icons/refresh/RefreshIcon";
 const Inventory = () => {
   const {
     data: ingredients,
-    isLoading,
+    isPending,
     refetch,
   } = useQuery({
     queryKey: ["ingredients"],
@@ -15,7 +15,7 @@ const Inventory = () => {
     refetchOnWindowFocus: false,
   });
 
-  if (isLoading) {
+  if (isPending) {
     return <div>Cargando...</div>;
   }
 

@@ -19,7 +19,7 @@ const PurchaseHistory = () => {
   const pageSize = 10;
   const {
     data: purchaseHistory,
-    isLoading,
+    isPending,
     refetch,
   } = useQuery({
     queryKey: ["purchaseHistory", pageIndex, ingredient],
@@ -76,7 +76,7 @@ const PurchaseHistory = () => {
     },
   });
 
-  if (isLoading) {
+  if (isPending) {
     return <div>Cargando...</div>;
   }
 
