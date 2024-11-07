@@ -112,7 +112,8 @@ const OrdersList = () => {
 
     if (ordersPagination?.data) {
       const allStatusId3Or5 = ordersPagination.data.every(
-        (order: any) => order.statusId === 3 || order.statusId === 5
+        (order: { statusId: number }) =>
+          order.statusId === 3 || order.statusId === 5
       );
 
       if (allStatusId3Or5 || elapsedTime >= 3 * 60 * 1000) {

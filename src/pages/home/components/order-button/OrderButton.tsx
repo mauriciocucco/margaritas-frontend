@@ -3,7 +3,11 @@ import { createMassOrders } from "../../../../api/orders";
 import { useState } from "react";
 import "./OrderButton.css";
 
-const OrderButton = ({ onOrderPlaced }) => {
+interface OrderButtonProps {
+  onOrderPlaced?: () => void;
+}
+
+const OrderButton = ({ onOrderPlaced }: OrderButtonProps) => {
   const [orderCount, setOrderCount] = useState(1);
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
