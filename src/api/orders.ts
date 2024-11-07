@@ -24,7 +24,7 @@ export const getOrders = async (
 
   const data = await response.json();
 
-  console.log("orders pagination: ", data);
+  // console.log("orders pagination: ", data);
 
   return data;
 };

@@ -3,16 +3,19 @@ import { createMassOrders } from "../../../../api/orders";
 import { useState } from "react";
 import "./OrderButton.css";
 
-const OrderButton = () => {
+const OrderButton = ({ onOrderPlaced }) => {
   const [orderCount, setOrderCount] = useState(1);
   const queryClient = useQueryClient();
-
   const { mutate, isPending } = useMutation({
     mutationFn: createMassOrders,
     onSuccess: (response) => {
       console.log(response);
 
       queryClient.invalidateQueries({ queryKey: ["orders"] });
+
+      if (onOrderPlaced) {
+        onOrderPlaced();
+      }
     },
     onError: (error) => {
       console.error("Error creating mass orders:", error);

@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getOrders } from "../../../../api/orders";
 import OrderButton from "../order-button/OrderButton";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./OrdersList.css";
 import { ORDER_STATUSES } from "./constants/order-statuses.constant";
 import { formatDate } from "../../../../utils/format-date";
@@ -19,6 +19,7 @@ const OrdersList = () => {
   const [statusId, setStatusId] = useState<number | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const pageSize = 10;
+  const [pollingInterval, setPollingInterval] = useState<number | false>(false);
   const {
     data: ordersPagination,
     isPending,
@@ -26,8 +27,9 @@ const OrdersList = () => {
   } = useQuery({
     queryKey: ["orders", pageIndex, statusId],
     queryFn: () => getOrders(pageIndex + 1, pageSize, statusId),
-    staleTime: 5 * 60 * 1000,
+    staleTime: 500,
     refetchOnWindowFocus: false,
+    refetchInterval: pollingInterval,
   });
   const tableData = useMemo(
     () => ordersPagination?.data || [],
@@ -92,6 +94,32 @@ const OrdersList = () => {
       setPageIndex(newState.pageIndex);
     },
   });
+  const queryClient = useQueryClient();
+  const startTimeRef = useRef<number | null>(null);
+
+  const handleOrderPlaced = () => {
+    setPollingInterval(1000);
+    queryClient.invalidateQueries({ queryKey: ["orders"] });
+  };
+
+  useEffect(() => {
+    const now = Date.now();
+    if (startTimeRef.current === null) {
+      startTimeRef.current = now;
+    }
+
+    const elapsedTime = now - startTimeRef.current;
+
+    if (ordersPagination?.data) {
+      const allStatusId3Or5 = ordersPagination.data.every(
+        (order: any) => order.statusId === 3 || order.statusId === 5
+      );
+
+      if (allStatusId3Or5 || elapsedTime >= 3 * 60 * 1000) {
+        setPollingInterval(false);
+      }
+    }
+  }, [ordersPagination, queryClient]);
 
   if (isPending) {
     return <div>Cargando...</div>;
@@ -101,7 +129,7 @@ const OrdersList = () => {
     <div className="orders-container">
       <h1>Jornada de Donación de Platos</h1>
 
-      <OrderButton></OrderButton>
+      <OrderButton onOrderPlaced={handleOrderPlaced}></OrderButton>
 
       <div className="filter-container">
         <label htmlFor="status-filter">Filtrar por estado:</label>
